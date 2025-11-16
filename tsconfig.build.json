@@ -1,0 +1,14 @@
+{
+    "extends": "./tsconfig.app.json",
+    "compilerOptions": {
+        "declaration": true,
+        "declarationDir": "dist/types",
+        "emitDeclarationOnly": true,
+        "noEmit": false,
+        "outDir": "dist",
+        "composite": false,
+        "skipLibCheck": true,
+        "verbatimModuleSyntax": false
+    },
+    "include": ["src"]
+}
