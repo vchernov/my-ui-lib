@@ -6,6 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a React component library built with Vite, TypeScript, React 19, and Material UI (MUI).
 The library is configured to be published as an ES module package that other projects can consume.
+Storybook is used for component development and documentation.
 
 ## Build Configuration
 
@@ -21,14 +22,20 @@ The build output is configured through:
 ## Common Commands
 
 ```bash
-# Development server (if needed for testing)
-npm run dev
+# Run Storybook for component development and testing
+npm run storybook
 
 # Build the library (runs both Vite and TypeScript)
 npm run build
 
+# Build Storybook for deployment
+npm run build-storybook
+
 # Lint the codebase
 npm run lint
+
+# Development server (Vite dev server, not typically used)
+npm run dev
 
 # Preview the built library
 npm run preview
@@ -37,22 +44,29 @@ npm run preview
 ## Project Structure
 
 - `src/index.ts`: Main entry point that exports all public components
-- `src/components/`: React components
+- `src/components/`: React components with their `.stories.tsx` files
+- `.storybook/`: Storybook configuration
+  - `main.ts`: Storybook core config (stories location, addons, framework)
+  - `preview.tsx`: Global decorators and parameters (includes MUI ThemeProvider setup)
 - `dist/`: Build output directory (generated, not in source control)
   - `my-ui-lib.es.js`: Bundled library code
   - `types/`: TypeScript declaration files
+- `storybook-static/`: Built Storybook output (generated, not in source control)
 
 ## Key Architecture Points
 
 - **Peer dependencies**: React, React-DOM (>=19), Material UI, and Emotion are peer dependencies, not bundled with the library. Consuming projects must install these themselves.
 - **Module format**: ES modules only (no CommonJS support)
-- **TypeScript configuration**: Strict mode enabled with comprehensive linting rules
+- **TypeScript configuration**: Strict mode enabled with comprehensive linting rules. Uses project references with separate configs for app (`tsconfig.app.json`), node tools (`tsconfig.node.json`), and Storybook (`tsconfig.storybook.json`).
 - **React compiler**: Uses SWC for fast compilation via `@vitejs/plugin-react-swc`
 - **UI framework**: Components are built on top of Material UI (MUI) v7 with Emotion styling
+- **Storybook setup**: Configured with React-Vite framework. The `.storybook/preview.tsx` wraps all stories with MUI's ThemeProvider and CssBaseline so components render correctly. Uses `addon-docs` for automatic documentation generation.
 
 ## Adding New Components
 
 When adding new components:
-1. Create the component file in `src/components/`
-2. Export the component from `src/index.ts` to make it part of the public API
-3. Run `npm run build` to ensure both JS and type definitions are generated correctly
+1. Create the component file in `src/components/` using **named exports** (e.g., `export const MyComponent = () => {}`)
+2. Create a corresponding `.stories.tsx` file in the same directory for Storybook documentation
+   - Import types from `@storybook/react-vite` (not `@storybook/react`) to satisfy ESLint rules
+3. Export the component from `src/index.ts` to make it part of the public API using the pattern: `export {ComponentName} from './components/ComponentName'`
+4. Run `npm run build` to ensure both JS and type definitions are generated correctly
