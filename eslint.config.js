@@ -1,3 +1,4 @@
+import storybook from "eslint-plugin-storybook";
 import js from '@eslint/js'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
@@ -29,4 +30,5 @@ export default tseslint.config(
             semi: ['error', 'always'],
         },
     },
-)
+    storybook.configs["flat/recommended"],
+);
