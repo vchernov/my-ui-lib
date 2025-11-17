@@ -1,1 +1,1 @@
-export {Placeholder} from './components/Placeholder';
+export {LoadingBar} from './components/LoadingBar';

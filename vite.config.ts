@@ -11,7 +11,7 @@ export default defineConfig({
             fileName: "my-ui-lib.es",
         },
         rollupOptions: {
-            external: ["react", "react-dom"],
+            external: ["react", "react-dom", "@mui/material", "@emotion/react", "@emotion/styled"],
         },
     },
 });
