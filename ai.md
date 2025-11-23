@@ -1,6 +1,7 @@
-# CLAUDE.md
+# Project Context for AI Assistants
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This document is meant for *all* AI coding tools (Claude Code, GitHub Copilot, and any others).
+Follow the guidelines below regardless of which system reads it.
 
 ## Project Overview
 
