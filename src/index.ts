@@ -1,1 +1,1 @@
-export {LoadingBar} from './components/LoadingBar';
+export {LoadingBar} from "./components/LoadingBar";
